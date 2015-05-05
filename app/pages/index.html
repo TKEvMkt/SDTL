@@ -54,7 +54,7 @@
 
     <div ng-controller="TaskLister">
       <ul>
-        <li ng-repeat="bucket in buckets"> {{task}} | {{priority}} </li>
+        <li ng-repeat="newJob in newJobs"> {{newJob.task}} | {{newJob.priority}} </li>
       </ul>
     </div>
 

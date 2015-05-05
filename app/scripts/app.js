@@ -14,7 +14,9 @@ app.controller("TaskLister", [
 	"$log",
 	function($scope, $log) {
 		
-		$scope.buckets = [{task: "test", priority: "test"}];
+		$scope.newJobs = [
+			{task: "test", priority: "test"},
+			{task: "test2", priority: "test2"}];
 
 		fbTaskTesting.on('child_added', function(dataSnapshot) {
 
@@ -33,11 +35,11 @@ app.controller("TaskLister", [
 	        console.log("Task: " + record.task + "\n" + "Priority: " + record.priority);
 	        
 	        // load records into buckets array of objects
-	        $scope.buckets.push(record);    		
+	        $scope.newJobs.push(record);    		
 
 		});
 		
-		console.log($scope.buckets);
+		console.log($scope.newJobs);
 		
 	}
 ]);
