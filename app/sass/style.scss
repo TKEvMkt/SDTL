@@ -1,0 +1,28 @@
+html {
+    height: 100%;
+  }
+
+  body.container {
+    font-family: 'Open Sans';
+
+  }
+
+  .dir h1 {
+    font-size: 32px;
+    color: black;
+    min-height: 100%;
+    background: #DE8853;
+    padding:100px;
+    text-align: center;
+    width: 50%;
+  }
+
+    .subdir h3 {
+    font-size: 16px;
+    color: red;
+    min-height: 100%;
+    background: #53A9DE;
+    padding: 100px;
+    width: 50%;
+    text-align: center;
+  }
