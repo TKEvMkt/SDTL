@@ -17,7 +17,9 @@
   <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
-  <script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
   <script src="/js/app.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 
@@ -36,6 +38,8 @@
     </div>
   </div>
 
+  
+
   <!-- here I want to take input JUST to test Firebase -->
   <div class="container">
     <h2>INPUT</h2>
@@ -52,25 +56,18 @@
       </div>
     </form>
 
-    <div ng-controller="TaskLister">
+    <div ng-controller="TaskLoader">
       <ul>
-        <li ng-repeat="newJob in newJobs"> {{newJob.task}} | {{newJob.priority}} </li>
+        <li ng-repeat="chore in chores"> {{chore.task}} | {{chore.priority}} </li> 
       </ul>
     </div>
 
-    <script>
-    var fbTaskTesting = new Firebase("https://fbtasktesting.firebaseio.com/");
-    $('#priorityInput').keypress(function (e) {
-      // console.log("sdafasd"); - from Ryan to test execution
-      if (e.keyCode === 13) {
-        var taskString = $('#taskInput').val ();
-        var priorityString = $('#priorityInput').val ();
+    <div ng-controller="TaskLister">
+      <ul>
+        
+      </ul>
+    </div>
 
-        fbTaskTesting.push({task: taskString, priority: priorityString});
-
-      }
-    });
-
-    </script>
+    
   </body>
   </html>

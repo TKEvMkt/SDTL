@@ -7,21 +7,39 @@ app.controller("ApplicationController", [
 	function($scope, $log) {
 		$scope.jumbotronHeading = "Bloc It Off!";
 		$log.debug("ApplicationController");
-	}
+		}
 ]);
 
-app.controller("TaskLister", [
+app.controller("TaskLoader", [
 	"$scope",
 	"$log",
+	
+
 	function($scope, $log) {
-		
-		$scope.newJobs = [
+
+	// load test data
+	$scope.chores = [
 			{task: "test", priority: "test"},
 			{task: "test2", priority: "test2"}];
+			
+	var fbTaskTesting = new Firebase("https://fbtasktesting.firebaseio.com/");
+	
+		
+			$('#priorityInput').keypress(function (e) {
+			 
+			if (e.keyCode === 13) {
+				var taskString = $('#taskInput').val ();
+				var priorityString = $('#priorityInput').val ();
+				fbTaskTesting.push({task: taskString, priority: priorityString});
 
-		fbTaskTesting.on('child_added', function(dataSnapshot) {
+	      		}
+	      	
 
+	    	});
 
+	  
+
+	  fbTaskTesting.on('child_added', function(dataSnapshot) {
 			
 			// These next four lines are just learning more about firebase tools.
 			var x = dataSnapshot.exists();
@@ -35,12 +53,31 @@ app.controller("TaskLister", [
 	        //verify that records are created correctly
 	        console.log("Task: " + record.task + "\n" + "Priority: " + record.priority);
 	        
-	        // load records into buckets array of objects
-	        $scope.newJobs.push(record);    		
+	        // load record objects into array of objects
+	        $scope.chores.push(record);    		
 
-		});
+		});  
+	  $log.debug("Task Loader is Initialized");
+	  console.log($scope.chores);
+
+	    
+
+  }]);
+
+
+app.controller("TaskLister", [
+	"$scope",
+	"$log",
+	function($scope, $log) {
 		
-		console.log($scope.newJobs);
+		
+
+		// var choresArray = sync.$asArray();
+		// $scope.chores = choresArray;
+
+	
+		
+		
 		
 	}
 ]);
