@@ -1,12 +1,12 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var app = angular.module("SDTL", []);
+var app = angular.module("SDTL", ["firebase"]);
 
 app.controller("ApplicationController", [
 	"$scope",
 	"$log",
 	function($scope, $log) {
 		$scope.jumbotronHeading = "Bloc It Off!";
-		$log.debug("ApplicationController");
+		$log.debug("Application Controller is Initialized");
 		}
 ]);
 
@@ -37,48 +37,38 @@ app.controller("TaskLoader", [
 
 	    	});
 
-	  
+	
+		  console.log("Task Loader is Initialized");
+		  console.log($scope.chores);
 
-	  fbTaskTesting.on('child_added', function(dataSnapshot) {
-			
-			// These next four lines are just learning more about firebase tools.
-			var x = dataSnapshot.exists();
-			console.log(x);
-			var y = dataSnapshot.numChildren();
-			console.log(y);
-
-			// create a new variable with all the record info for each child
-	        var record = dataSnapshot.val();
-
-	        //verify that records are created correctly
-	        console.log("Task: " + record.task + "\n" + "Priority: " + record.priority);
-	        
-	        // load record objects into array of objects
-	        $scope.chores.push(record);    		
-
-		});  
-	  $log.debug("Task Loader is Initialized");
-	  console.log($scope.chores);
+	    }]);  
 
 	    
-
-  }]);
-
-
-app.controller("TaskLister", [
-	"$scope",
-	"$log",
-	function($scope, $log) {
-		
-		
-
-		// var choresArray = sync.$asArray();
-		// $scope.chores = choresArray;
-
+app.controller("TaskLister", 
 	
+
+	function($scope, $firebaseArray) {
+		  var ref = new Firebase("https://fbtasktesting.firebaseio.com/");
+		  // create a synchronized array
+		  // click on `index.html` above to see it used in the DOM!
+		  $scope.chores = $firebaseArray(ref);
+		  console.log($scope.chores);
+});
+
+
+
+/*app.controller("TaskLister", [
+	"$scope",
+	"$firebaseArray",
+
+	function($scope, $firebaseArray) {
+
+		var fire = new Firebase("https://fbtasktesting.firebaseio.com/");
 		
-		
-		
-	}
-]);
+
+		$scope.chores = $firebaseArray(fire);
+
+		console.log($scope.chores);		
+		}
+]);*/
 },{}]},{},[1]);

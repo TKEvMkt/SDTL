@@ -1,11 +1,11 @@
-var app = angular.module("SDTL", []);
+var app = angular.module("SDTL", ["firebase"]);
 
 app.controller("ApplicationController", [
 	"$scope",
 	"$log",
 	function($scope, $log) {
 		$scope.jumbotronHeading = "Bloc It Off!";
-		$log.debug("ApplicationController");
+		$log.debug("Application Controller is Initialized");
 		}
 ]);
 
@@ -36,47 +36,37 @@ app.controller("TaskLoader", [
 
 	    	});
 
-	  
+	
+		  console.log("Task Loader is Initialized");
+		  console.log($scope.chores);
 
-	  fbTaskTesting.on('child_added', function(dataSnapshot) {
-			
-			// These next four lines are just learning more about firebase tools.
-			var x = dataSnapshot.exists();
-			console.log(x);
-			var y = dataSnapshot.numChildren();
-			console.log(y);
-
-			// create a new variable with all the record info for each child
-	        var record = dataSnapshot.val();
-
-	        //verify that records are created correctly
-	        console.log("Task: " + record.task + "\n" + "Priority: " + record.priority);
-	        
-	        // load record objects into array of objects
-	        $scope.chores.push(record);    		
-
-		});  
-	  $log.debug("Task Loader is Initialized");
-	  console.log($scope.chores);
+	    }]);  
 
 	    
-
-  }]);
-
-
-app.controller("TaskLister", [
-	"$scope",
-	"$log",
-	function($scope, $log) {
-		
-		
-
-		// var choresArray = sync.$asArray();
-		// $scope.chores = choresArray;
-
+app.controller("TaskLister", 
 	
+
+	function($scope, $firebaseArray) {
+		  var ref = new Firebase("https://fbtasktesting.firebaseio.com/");
+		  // create a synchronized array
+		  // click on `index.html` above to see it used in the DOM!
+		  $scope.chores = $firebaseArray(ref);
+		  console.log($scope.chores);
+});
+
+
+
+/*app.controller("TaskLister", [
+	"$scope",
+	"$firebaseArray",
+
+	function($scope, $firebaseArray) {
+
+		var fire = new Firebase("https://fbtasktesting.firebaseio.com/");
 		
-		
-		
-	}
-]);
+
+		$scope.chores = $firebaseArray(fire);
+
+		console.log($scope.chores);		
+		}
+]);*/
