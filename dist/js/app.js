@@ -7,68 +7,58 @@ app.controller("ApplicationController", [
 	function($scope, $log) {
 		$scope.jumbotronHeading = "Bloc It Off!";
 		$log.debug("Application Controller is Initialized");
-		}
+	}
 ]);
 
 app.controller("TaskLoader", [
 	"$scope",
 	"$log",
-	
-
 	function($scope, $log) {
+		var fbTaskTesting = new Firebase("https://fbtasktesting.firebaseio.com/");
 
-	// load test data
-	$scope.chores = [
-			{task: "test", priority: "test"},
-			{task: "test2", priority: "test2"}];
-			
-	var fbTaskTesting = new Firebase("https://fbtasktesting.firebaseio.com/");
-	
-		
-			$('#priorityInput').keypress(function (e) {
-			 
+		$('#priorityInput').keypress(function (e) {
 			if (e.keyCode === 13) {
 				var taskString = $('#taskInput').val ();
 				var priorityString = $('#priorityInput').val ();
-				fbTaskTesting.push({task: taskString, priority: priorityString});
+				fbTaskTesting.push({
+					task: taskString,
+					priority: priorityString,
+					createdAt: (new Date())
+				});
+			}
+		});
 
-	      		}
-	      	
+		console.log("Task Loader is Initialized");
+		console.log($scope.chores);
 
-	    	});
+	}
+]);  
 
-	
-		  console.log("Task Loader is Initialized");
-		  console.log($scope.chores);
-
-	    }]);  
-
-	    
-app.controller("TaskLister", 
-	
-
+app.controller("TaskLister", [
+	"$scope",
+	"$firebaseArray",
 	function($scope, $firebaseArray) {
-		  var ref = new Firebase("https://fbtasktesting.firebaseio.com/");
-		  // create a synchronized array
-		  // click on `index.html` above to see it used in the DOM!
-		  $scope.chores = $firebaseArray(ref);
-		  console.log($scope.chores);
-});
+		var ref = new Firebase("https://fbtasktesting.firebaseio.com/");
+
+		$scope.chores = $firebaseArray(ref);
+		console.log($scope.chores);
+	}
+]);
 
 
 
 /*app.controller("TaskLister", [
-	"$scope",
-	"$firebaseArray",
+"$scope",
+"$firebaseArray",
 
-	function($scope, $firebaseArray) {
+function($scope, $firebaseArray) {
 
-		var fire = new Firebase("https://fbtasktesting.firebaseio.com/");
-		
+var fire = new Firebase("https://fbtasktesting.firebaseio.com/");
 
-		$scope.chores = $firebaseArray(fire);
 
-		console.log($scope.chores);		
-		}
+$scope.chores = $firebaseArray(fire);
+
+console.log($scope.chores);		
+}
 ]);*/
 },{}]},{},[1]);
