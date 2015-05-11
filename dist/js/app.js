@@ -20,10 +20,11 @@ app.controller("TaskLoader", [
 			if (e.keyCode === 13) {
 				var taskString = $('#taskInput').val ();
 				var priorityString = $('#priorityInput').val ();
+				var createdAt = (Firebase.ServerValue.TIMESTAMP);
 				fbTaskTesting.push({
 					task: taskString,
 					priority: priorityString,
-					createdAt: (new Date())
+					created: createdAt
 				});
 			}
 		});
