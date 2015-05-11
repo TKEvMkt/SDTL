@@ -19,17 +19,27 @@ app.controller("TaskLoader", [
 			if (e.keyCode === 13) {
 				var taskString = $('#taskInput').val ();
 				var priorityString = $('#priorityInput').val ();
-				var createdAt = (Firebase.ServerValue.TIMESTAMP);
+				var createdAt = (new Date().getTime());
+				var destructAt = (createdAt+604800000);
+				var destructDate = new Date(destructAt);
+				var destructEd = (destructDate.toString());
+
+				
 				fbTaskTesting.push({
 					task: taskString,
 					priority: priorityString,
-					created: createdAt
+					created: createdAt,
+					destruct: destructAt,
+					killtime: destructEd
 				});
+
 			}
 		});
 
 		console.log("Task Loader is Initialized");
-		console.log($scope.chores);
+		// console.log($scope.chores);
+		
+		
 
 	}
 ]);  
@@ -47,17 +57,3 @@ app.controller("TaskLister", [
 
 
 
-/*app.controller("TaskLister", [
-"$scope",
-"$firebaseArray",
-
-function($scope, $firebaseArray) {
-
-var fire = new Firebase("https://fbtasktesting.firebaseio.com/");
-
-
-$scope.chores = $firebaseArray(fire);
-
-console.log($scope.chores);		
-}
-]);*/
