@@ -1,1 +1,38 @@
-<h1>Home Page</h1>
+<!-- HEADER -->
+<div class="container">
+    <div class="jumbotron">
+      <h1>{{jumbotronHeading}}</h1>      
+      <p>This will soon be a self destructing task list using firebase and angular </p>      
+    </div>
+ </div>
+
+ <!-- INPUT TASKS -->
+ <div class="container">
+    <h2>INPUT</h2>
+
+    <form role="form" ng-submit="addTask()">
+      <div class="form-group">
+        <label for="task">Task:</label>
+        <input type="text" class="form-control" id="taskInput" placeholder="task">
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priority:</label>
+        <input type="text" class="form-control" id="priorityInput" placeholder="priority">
+      </div>
+    </form>
+ </div>
+
+ <!-- LOAD FIREBASE -->
+ <div ng-controller="TaskLoader">
+      <ul>   
+
+      </ul>
+ </div>
+
+<!-- PRINT TO DOM -->
+ <div class="container" ng-controller="TaskLister">
+      <ul>
+        <li ng-repeat="chore in chores"> {{chore.task}} | {{chore.priority}} | {{chore.created}} | Your new task must be completed by: {{chore.killtime}}</li> 
+      </ul>
+ </div>

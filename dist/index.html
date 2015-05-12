@@ -3,7 +3,7 @@
 <head>
   <!-- gave it my own title -->
   <title>Bloc It Off!</title>
-  <!-- load bootstrap and the usual CSS related -->
+  <!-- load bootstrap and the usual CSS related and jquery-->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -12,61 +12,24 @@
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.1/build/cssreset/cssreset-min.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,600,700,300' rel='stylesheet' type='text/css'>
-  <!-- load firebase angular router jquery -->
+  <!-- load firebase -->
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
   <script src="https://cdn.firebase.com/v0/firebase.js"></script>
   <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
+  <!-- load angular componentry -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
-  <script src="https://cdn.firebase.com/js/client/1.1.1/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/1.1.1/angularfire.min.js"></script>
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.min.js"></script>
   <script src="/js/app.js"></script>
-  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+  
 
-  <script src="/js/app.js"></script>
+
 
 
 </head>
-<body ng-controller="ApplicationController">
-
-  <!-- messing around with boostrap just to stand something up -->
-
-  <div class="container">
-    <div class="jumbotron">
-      <h1>{{jumbotronHeading}}</h1>      
-      <p>This will soon be a self destructing task list using firebase and angular </p>      
-    </div>
-  </div>
-
-  
-
-  <!-- here I want to take input JUST to test Firebase -->
-  <div class="container">
-    <h2>INPUT</h2>
-
-    <form role="form" ng-submit="addTask()">
-      <div class="form-group">
-        <label for="task">Task:</label>
-        <input type="text" class="form-control" id="taskInput" placeholder="task">
-      </div>
-
-      <div class="form-group">
-        <label for="priority">Priority:</label>
-        <input type="text" class="form-control" id="priorityInput" placeholder="priority">
-      </div>
-    </form>
-
-    <div ng-controller="TaskLoader">
-      <ul>
-        
-      </ul>
-    </div>
-
-    <div ng-controller="TaskLister">
-      <ul>
-        <li ng-repeat="chore in chores"> {{chore.task}} | {{chore.priority}} | {{chore.created}} | Your new task must be completed by: {{chore.killtime}}</li> 
-      </ul>
-    </div>
-
-    
-  </body>
-  </html>
+    <body>
+      <div ui-view></div>
+    </body>
+</html>
