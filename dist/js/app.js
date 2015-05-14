@@ -34,10 +34,53 @@ app.controller('TaskLoader', [
 
 		$scope.fbTaskTesting  = $firebaseArray(ref);
 
+		
 		var MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 		var MILLISECONDS_PER_WEEK = 7 * MILLISECONDS_PER_DAY;
 
-		$('#priorityInput').keypress(function (e) {
+		
+		
+      	$scope.master = {};
+
+	      $scope.update = function(task) {
+	        $scope.master = angular.copy(task);
+	        var taskString = $scope.master.task;
+			var priorityString = $scope.master.priority;
+			var createdAt = (new Date().getTime());
+			var destructAt = (createdAt+MILLISECONDS_PER_WEEK);
+			var destructDate = new Date(destructAt);
+			var destructEd = (destructDate.toString());
+			
+				var newTask = {
+					task: taskString,
+					priority: priorityString,
+					created: createdAt,
+					destruct: destructAt,
+					killtime: destructEd
+				};
+
+
+
+			$scope.fbTaskTesting.$add(newTask);
+			$scope.reset();
+
+	      };
+
+	      $scope.reset = function() {
+	        $scope.task = {};
+	      };
+
+	      
+
+		
+
+		
+
+		console.log('Task Loader is Initialized');
+		// console.log($scope.chores);
+  }]);
+
+		/*$('#priorityInput').keypress(function (e) {
 			if (e.keyCode === 13) {
 				var taskString = $('#taskInput').val ();
 				var priorityString = $('#priorityInput').val ();
@@ -53,17 +96,8 @@ app.controller('TaskLoader', [
 					destruct: destructAt,
 					killtime: destructEd
 				};
-				// fbTaskTesting.push(newTask);
+				// fbTaskTesting.push(newTask);*/
 
-				$scope.fbTaskTesting.$add(newTask);
-
-			}
-		});
-
-		console.log('Task Loader is Initialized');
-		// console.log($scope.chores);
-	}
-]);  
 
 app.controller('TaskLister', [
 	'$scope',
