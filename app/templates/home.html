@@ -26,6 +26,9 @@
  <!-- LOAD FIREBASE -->
  <div class="container" ng-controller="TaskLoader">
       <form novalidate class="simple-form">
+<!--         <select ng-options="priorityChoices" ng-model="task.priority">
+          <option value="">Unknown</option>
+        </select> -->
           Task: <input type="text" ng-model="task.task" /><br />
           Gender: <input type="radio" ng-model="task.priority" value="Low" />Low
           <input type="radio" ng-model="task.priority" value="Medium" />Medium<br />
