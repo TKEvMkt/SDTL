@@ -20,10 +20,6 @@ app.controller('ApplicationController', [
 	}
 ]);
 
-// 1. Use $firebaseArray service
-// 2. Fixed add tasks to use $firebaseArray instead of .push
-// 3. consider using a form submit rather than detecting a keypress with keyCode 13
-
 app.controller('TaskLoader', [
 	'$scope',
 	'$log',
@@ -91,33 +87,10 @@ app.controller('TaskLoader', [
 	        $scope.task = {};
 	      };
 
-	      
-
-		
-
-		
 
 		console.log('Task Loader is Initialized');
-		// console.log($scope.chores);
-  }]);
-
-		/*$('#priorityInput').keypress(function (e) {
-			if (e.keyCode === 13) {
-				var taskString = $('#taskInput').val ();
-				var priorityString = $('#priorityInput').val ();
-				var createdAt = (new Date().getTime());
-				var destructAt = (createdAt+MILLISECONDS_PER_WEEK);
-				var destructDate = new Date(destructAt);
-				var destructEd = (destructDate.toString());
-				
-				var newTask = {
-					task: taskString,
-					priority: priorityString,
-					created: createdAt,
-					destruct: destructAt,
-					killtime: destructEd
-				};
-				// fbTaskTesting.push(newTask);*/
+		
+ }]);
 
 
 app.controller('TaskLister', [
