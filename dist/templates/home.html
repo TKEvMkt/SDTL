@@ -6,38 +6,40 @@
     </div>
  </div>
 
- <!-- INPUT TASKS -->
-<!--  <div class="container">
-    <h2>INPUT</h2>
 
-    <form role="form" ng-submit="addTask()">
-      <div class="form-group">
-        <label for="task">Task:</label>
-        <input type="text" class="form-control" id="taskInput" placeholder="task">
-      </div>
-
-      <div class="form-group">
-        <label for="priority">Priority:</label>
-        <input type="text" class="form-control" id="priorityInput" placeholder="priority">
-      </div>
-    </form>
- </div> -->
-
- <!-- LOAD FIREBASE -->
+ <!-- LOAD FIREBASE via INPUT -->
  <div class="container" ng-controller="TaskLoader">
       <form novalidate class="simple-form">
-<!--         <select ng-options="priorityChoices" ng-model="task.priority">
+
+      
+      <!-- MY attempt at using ng-select   -->
+      Task: <input type="text" ng-model="task.task" /><br />
+      Priority:
+        <select ng-options="value.label as value.label for value in priorityChoices" ng-model="task.priority">
+            <option value="">Unknown</option>
+            <option value="0">High</option>
+            <option value="1">Medium</option>
+            <option value="2">Low</option>
+        </select> <br /><br />
+
+        <input type="button" ng-click="reset()" value="Reset Fields" /> <br />
+        <input type="submit" ng-click="update(task)" value="Update Task List" />  
+
+
+      <!-- RYAN SAMPLE CODE        
+          <select ng-options="priorityChoices" ng-model="task.priority">
           <option value="">Unknown</option>
         </select> -->
+
+
+      <!-- WORKING CODE    
           Task: <input type="text" ng-model="task.task" /><br />
-          Gender: <input type="radio" ng-model="task.priority" value="Low" />Low
+          Priority: <br /><input type="radio" ng-model="task.priority" value="Low" />Low <br />
           <input type="radio" ng-model="task.priority" value="Medium" />Medium<br />
           <input type="radio" ng-model="task.priority" value="High" />High<br />
           <input type="button" ng-click="reset()" value="Reset Fields" />
-          <input type="submit" ng-click="update(task)" value="Update Task List" />
+          <input type="submit" ng-click="update(task)" value="Update Task List" />  -->
       </form>
-    <!-- <pre>form = {{task | json}}</pre>
-    <pre>master = {{master | json}}</pre> -->
  </div>
 
 <!-- PRINT TO DOM -->

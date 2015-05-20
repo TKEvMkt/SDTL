@@ -21,10 +21,6 @@ app.controller('ApplicationController', [
 	}
 ]);
 
-// 1. Use $firebaseArray service
-// 2. Fixed add tasks to use $firebaseArray instead of .push
-// 3. consider using a form submit rather than detecting a keypress with keyCode 13
-
 app.controller('TaskLoader', [
 	'$scope',
 	'$log',
@@ -38,24 +34,51 @@ app.controller('TaskLoader', [
 		var MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 		var MILLISECONDS_PER_WEEK = 7 * MILLISECONDS_PER_DAY;
 
-		// var updateObject = function(original, updates) {
+		// My attempt at refactoring based on Ryan's example
+		var updateObject = function(original, updates) {
 
-		// };
+		};
 
-		// var priorityChoices = {
-		// 	0: "High",
-		// 	1: "Medium",
-		// 	2: "Low",
-		// };
-		// $scope.priorityChoices = priorityChoices;
+		var priorityChoices = [{
+			"id": 0, 
+			"label": "High"},
+			{
+			"id": 1,
+			"label": "Medium"},
+			{
+			"id": 2,
+			"label": "Low"}];
+			
+		$scope.priorityChoices = priorityChoices;
 
-		// var getPriorityDisplayValue = function(id) {
-		// 	return priorityChoices[id];
-		// };
+		var getPriorityDisplayValue = function(id) {
+			return priorityChoices[id];
+			task.priority=priorityChoices[id];
+		};
 
-		// $scope.getPriorityDisplayValue = getPriorityDisplayValue;
+		$scope.getPriorityDisplayValue = getPriorityDisplayValue;
 		
-      	// $scope.master = {};
+      	$scope.master = {};
+		
+		// RYAN SAMPLE CODE
+				// var updateObject = function(original, updates) {
+
+				// };
+
+				// var priorityChoices = {
+				// 	0: "High",
+				// 	1: "Medium",
+				// 	2: "Low",
+				// };
+				// $scope.priorityChoices = priorityChoices;
+
+				// var getPriorityDisplayValue = function(id) {
+				// 	return priorityChoices[id];
+				// };
+
+				// $scope.getPriorityDisplayValue = getPriorityDisplayValue;
+				
+		      	// $scope.master = {};
 
 	      $scope.update = function(task) {
 			var createdAt = (new Date().getTime());
@@ -92,33 +115,10 @@ app.controller('TaskLoader', [
 	        $scope.task = {};
 	      };
 
-	      
-
-		
-
-		
 
 		console.log('Task Loader is Initialized');
-		// console.log($scope.chores);
-  }]);
-
-		/*$('#priorityInput').keypress(function (e) {
-			if (e.keyCode === 13) {
-				var taskString = $('#taskInput').val ();
-				var priorityString = $('#priorityInput').val ();
-				var createdAt = (new Date().getTime());
-				var destructAt = (createdAt+MILLISECONDS_PER_WEEK);
-				var destructDate = new Date(destructAt);
-				var destructEd = (destructDate.toString());
-				
-				var newTask = {
-					task: taskString,
-					priority: priorityString,
-					created: createdAt,
-					destruct: destructAt,
-					killtime: destructEd
-				};
-				// fbTaskTesting.push(newTask);*/
+		
+ }]);
 
 
 app.controller('TaskLister', [

@@ -33,24 +33,51 @@ app.controller('TaskLoader', [
 		var MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 		var MILLISECONDS_PER_WEEK = 7 * MILLISECONDS_PER_DAY;
 
-		// var updateObject = function(original, updates) {
+		// My attempt at refactoring based on Ryan's example
+		var updateObject = function(original, updates) {
 
-		// };
+		};
 
-		// var priorityChoices = {
-		// 	0: "High",
-		// 	1: "Medium",
-		// 	2: "Low",
-		// };
-		// $scope.priorityChoices = priorityChoices;
+		var priorityChoices = [{
+			"id": 0, 
+			"label": "High"},
+			{
+			"id": 1,
+			"label": "Medium"},
+			{
+			"id": 2,
+			"label": "Low"}];
+			
+		$scope.priorityChoices = priorityChoices;
 
-		// var getPriorityDisplayValue = function(id) {
-		// 	return priorityChoices[id];
-		// };
+		var getPriorityDisplayValue = function(id) {
+			return priorityChoices[id];
+			task.priority=priorityChoices[id];
+		};
 
-		// $scope.getPriorityDisplayValue = getPriorityDisplayValue;
+		$scope.getPriorityDisplayValue = getPriorityDisplayValue;
 		
-      	// $scope.master = {};
+      	$scope.master = {};
+		
+		// RYAN SAMPLE CODE
+				// var updateObject = function(original, updates) {
+
+				// };
+
+				// var priorityChoices = {
+				// 	0: "High",
+				// 	1: "Medium",
+				// 	2: "Low",
+				// };
+				// $scope.priorityChoices = priorityChoices;
+
+				// var getPriorityDisplayValue = function(id) {
+				// 	return priorityChoices[id];
+				// };
+
+				// $scope.getPriorityDisplayValue = getPriorityDisplayValue;
+				
+		      	// $scope.master = {};
 
 	      $scope.update = function(task) {
 			var createdAt = (new Date().getTime());
