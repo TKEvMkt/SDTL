@@ -53,58 +53,25 @@ app.controller('TaskLoader', [
 
 		var getPriorityDisplayValue = function(id) {
 			return priorityChoices[id];
-			task.priority=priorityChoices[id];
-		};
+				};
 
 		$scope.getPriorityDisplayValue = getPriorityDisplayValue;
 		
       	$scope.master = {};
 		
-		// RYAN SAMPLE CODE
-				// var updateObject = function(original, updates) {
-
-				// };
-
-				// var priorityChoices = {
-				// 	0: "High",
-				// 	1: "Medium",
-				// 	2: "Low",
-				// };
-				// $scope.priorityChoices = priorityChoices;
-
-				// var getPriorityDisplayValue = function(id) {
-				// 	return priorityChoices[id];
-				// };
-
-				// $scope.getPriorityDisplayValue = getPriorityDisplayValue;
-				
-		      	// $scope.master = {};
-
+	
 	      $scope.update = function(task) {
-			var createdAt = (new Date().getTime());
-			var destructAt = (createdAt+MILLISECONDS_PER_WEEK);
-			var destructDate = new Date(destructAt);
-			var destructEd = (destructDate.toString());
-
+			
 			var now = (new Date()).getTime();
 			var newTask = angular.copy(task);
 			var newTaskDefaultDates = {
 				created: now,
-				destruct: destructAt,
-				killtime: destructEd
+				destruct: (now+MILLISECONDS_PER_WEEK),
+				killtime: ((now+MILLISECONDS_PER_WEEK).toString())
 			};
 			newTask.created = newTaskDefaultDates.created;
 			newTask.destruct = newTaskDefaultDates.destruct;
 			newTask.killtime = newTaskDefaultDates.killtime;
-
-			// // newTask.update(newTaskDefaultDates);
-			// for (prop in newTaskDefaultDates) {
-			// 	if (newTaskDefaultDates.hasOwnProperty(prop)) {
-			// 		newTask[prop] = newTaskDefaultDates[prop];
-			// 	}
-			// }
-			// updateObject(newTask, newTaskDefaultDates)
-
 
 			$scope.fbTaskTesting.$add(newTask);
 			$scope.reset();
